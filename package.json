@@ -1,0 +1,28 @@
+{
+  "name": "resource-finder",
+  "version": "1.0.0",
+  "description": "## GitHub Repo: https://github.com/skills-for-devs/resource-finder.git",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skills-for-devs/resource-finder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skills-for-devs/resource-finder/issues"
+  },
+  "homepage": "https://github.com/skills-for-devs/resource-finder#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "pg": "^8.5.1",
+    "superagent": "^6.1.0"
+  }
+}
