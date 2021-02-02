@@ -19,15 +19,25 @@ app.use(methodOverride('_method'));
 //------- global variables
 
 const DATABASE_URL = process.env.DATABASE_URL;
+const VIDEO_API_KEY = process.env.VIDEO_API_KEY;
 const client = new pg.Client(DATABASE_URL);
 const PORT = process.env.PORT || 3111;
+// const allJobs = [];
+// const allVideos = [];
 
 // ------- routes
 
 app.get('/', getLogin); // login portal
 // app.get('/vidsearch', getVideoSearch); // render search input to query APIs
-app.get('/search', getSearch);
-app.post('/search', saveResource); // save a chosen vid/job to their DB
+
+//placeholder for getting search to work
+app.get('/search/new', (req, res) => {
+  res.render('pages/search.ejs');
+});
+
+// app.get('/search', getSearch);
+app.post('/search', getSearch);
+// app.post('/search', saveResource); // save a chosen vid/job to their DB
 app.get('/resources', viewResources); //view saved elements from db
 app.delete('/resources', deleteResource);
 // app.error('/error', getError); // for errors
@@ -53,9 +63,34 @@ function getSearch(req,res) {
   // do both video and job search functions
   // two superagent calls
   // store in same object and pass to front end to render
-  console.log(req.body.search);
-  const query = req.body.search;
+  console.log(req.body);
+  const query = req.body.query;
+  const location = 'seattle';
+  let contentObject = {};
+  // const allJobs = [];
+  // const allVideos = [];
   const jobsUrl= `https://jobs.github.com/positions.json?description=${query}`;
+  const videoUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=21&q=${query}&type=video&key=${VIDEO_API_KEY}`;
+  superagent.get(jobsUrl).then(jobsInfo => {
+    // console.log(jobsInfo);
+    const jobs = jobsInfo.body.map(jobObject => new Job(jobObject));
+    contentObject.jobs = jobs;
+    // console.log('this is jobs array', allJobs);
+  }).then(() => superagent.get(videoUrl).then(videoInfo => {
+    // console.log('this is video info', videoInfo.body.items[0]);
+    const videos = videoInfo.body.items.map(videoObject => new Video(videoObject));
+    contentObject.videos = videos;
+    // console.log('this is all vides', allVideos);
+    res.render('pages/show.ejs', {content: contentObject});
+  }))
+  // superagent.get(videoUrl).then(videoInfo => {
+  //   console.log('this is video info', videoInfo);
+  // })
+    .catch(error => {
+      res.status(500).send('api failed');
+      console.error(error);
+    });
+
 
   //Notes from Chance:
   //Go out to one API, push results into an object
@@ -64,6 +99,12 @@ function getSearch(req,res) {
   //push results into same object as first api
   //send the object with two keys (videos, jobs) to the front-end
 }
+
+// function a() {
+//   superagent.get(videoUrl).then(videoInfo => {
+//     console.log('this is video info', videoInfo);
+//   }
+// };
 
 function getVideoSearch(req, res) {
   // user is presented with a search box to take their keyword query
@@ -153,12 +194,22 @@ function getError(req, res) {
 // ------- Helper functions
 
 
-function Video() {
+function Video(videoObject) {
   // constructors for rendering youtube video
+  this.title = videoObject.snippet.title;
+  this.url = `https://youtube.com/watch?v=${videoObject.id.videoId}`;
+  this.description = videoObject.snippet.description;
+  this.image = videoObject.snippet.thumbnails.medium.url;
+  // allVideos.push(this);
 }
 
-function Job() {
+function Job(jobObject) {
   // constructor for rendering github job
+  this.title = jobObject.title;
+  this.url = jobObject.url;
+  this.description = jobObject.description;
+  this.logo = jobObject.company_logo;
+  // allJobs.push(this);
 }
 
 
