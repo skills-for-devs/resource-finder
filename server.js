@@ -37,12 +37,12 @@ app.put('/resources', updateResource); // for editing saved favorite
 // --------- route callbacks
 
 function getLogin(req, res) {
-  // user is presented with a big beautiful login/signup box -- username, password
+  // user is presented with a big beautiful login/signup box -- username, name
   // check database for existing username based on user input (if user selects sign up)
   // if no matching username, create and add new
   // then res.redirect to search page
 
-  // check db for matching username/password based on user input (if user selects log in)
+  // check db for matching username/name based on user input (if user selects log in)
   // if credentials fail, give "try again" error message and reset fields
   // if pass, res.redirect to search page with saved user content from DB
 
@@ -56,6 +56,13 @@ function getSearch(req,res) {
   console.log(req.body.search);
   const query = req.body.search;
   const jobsUrl= `https://jobs.github.com/positions.json?description=${query}`;
+
+  //Notes from Chance:
+  //Go out to one API, push results into an object
+  //Chance suggested pulling default number of videos and pushing into an array, setting to display only __ at a time
+  //.then go out to second API
+  //push results into same object as first api
+  //send the object with two keys (videos, jobs) to the front-end
 }
 
 function getVideoSearch(req, res) {
