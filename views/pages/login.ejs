@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,27 +8,34 @@
   <link rel="stylesheet" type="text/css" href="/styles/base.css">
   <link rel="stylesheet" type="text/css" href="/styles/layout.css">
   <link rel="stylesheet" type="text/css" href="/styles/modules.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
   <title>Login</title>
 </head>
+
 <body>
   <nav></nav>
   <% if(data){ %>
     <div id="loginfailed"></div>
-   <% } else { %>
-    <div id="loginworked"></div>
-  <% } %>
+    <% } else { %>
+      <div id="loginworked"></div>
+      <% } %>
 
-  <form id="loginbox" action="/login" method="POST">
-    <input type="text" name="name" placeholder="Enter your name">
-    <input type="text" name="username" placeholder="Enter your email">
-    <input type="submit" value="Login">
-  </form>
+      <h1>Welcome to skills for Devs</h1>
 
-  <form id="signup" action="/signup" method="POST">
-    <input type="text" name="name" placeholder="Enter your name">
-    <input type="text" name="username" placeholder="Enter your email">
-    <input type="submit" value="Sign up">
-  </form>
-  <script src="js/app.js"></script>
+        <div>       
+          <form id="loginbox" action="/login" method="POST">
+            <input type="text" name="name" placeholder="Enter your name">
+            <input type="text" name="username" placeholder="Enter your email">
+            <input type="submit" value="Login">
+          </form>
+        </div>
+
+        <form id="signup" action="/signup" method="POST">
+          <input type="text" name="name" placeholder="Enter your name">
+          <input type="text" name="username" placeholder="Enter your email">
+          <input type="submit" value="Sign up">
+        </form>
+        <script src="js/app.js"></script>
 </body>
+
 </html>
