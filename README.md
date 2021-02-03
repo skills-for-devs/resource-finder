@@ -47,3 +47,10 @@ A dynamic app/website that allows the user to search for free resources based on
 - Table 1: user - responsible for storing name and username
 - Table 2: video - responsible for storing saved videos for each user (title, url, description, note)
 - Table 3: job - responsible for storing saved jobs for each user (title, url, note)
+
+## Credits and Collaborators
+
+- Chance Harmon (TA)
+- Nicco Ryan (TA)
+- Skyler Burger (TA)
+- Nicholas Carignan
