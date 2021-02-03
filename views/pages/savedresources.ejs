@@ -24,9 +24,10 @@
     <ul>
       <li><img src ="<%= jobs[i].logo%>" width="200px"></li>
       <li><a href="<%= jobs[i].url %>"><%= jobs[i].title %></a></li>
-      <form action="/resources/<%= jobs[i].id %>?_method=delete" method="POST">
+      <p><%= jobs[i].note %></p>
+      <form action="/resources/user/<%= user %>/resource/<%= jobs[i].id %>?_method=delete" method="POST">
         <input type="hidden" name="resource-type" value="job">
-        <input type="hidden" name="user" value="<%= user.id%>">
+        <input type="hidden" name="user" value="<%= user %>">
         <input type="submit" value="Delete job">
       </form>
     </ul>
@@ -38,7 +39,8 @@
       <li><a href="<%= videos[i].url %>"><img src="<%= videos[i].image%>" width="200px"></a></li>
       <li><%= videos[i].title %></a></li>
       <li><%= videos[i].description %></li>
-      <form action="/resources/<% videos[i].id %>?_method=delete" method="POST">
+      <p><%= videos[i].note %></p>
+      <form action="/resources/user/<%= user %>/resource/<%= videos[i].id %>?_method=delete" method="POST">
         <input type="hidden" name="resource-type" value="video">
         <input type="hidden" name="user" value="<%= user %>">
         <input type="submit" value="Delete video">

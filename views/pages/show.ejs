@@ -27,6 +27,7 @@
         <input type="hidden" name="logo" value="<%= content.jobs[i].logo %>">
         <input type="hidden" name="query" value="<%= query %>">
         <input type="submit" value="Bookmark this Job">
+        <input type="text" name="note" value="<%= content.jobs[i].note %>" placeholder="Enter a note here">
       </form>
     </ul>
     <% } %>
@@ -44,6 +45,7 @@
         <input type="hidden" name="image" value="<%= content.videos[i].image %>">
         <input type="hidden" name="query" value="<%= query %>">
         <input type="submit" value="Bookmark this Video">
+        <input type="text" name="note" value="<%= content.videos[i].note %>" placeholder="Enter a note here">
       </form>
     </ul>
     <% } %>

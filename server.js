@@ -48,7 +48,7 @@ app.get('/search/new/:id', (req, res) => {
 app.post('/search/:id', getSearch);
 // app.post('/search', saveResource); // save a chosen vid/job to their DB
 app.get('/resources/:id', viewResources); //view saved elements from db
-app.delete('/resources/:resourceid', deleteResource);
+app.delete('/resources/user/:id/resource/:resourceid', deleteResource);
 // app.error('/error', getError); // for errors
 app.put('/resources', updateResource); // for editing saved favorite
 app.post('/videoresources/:id', saveVideoResource);
@@ -166,8 +166,8 @@ function saveVideoResource(req, res) {
   console.log('this is params', req.params);
   const profileId = req.params.id;
   const savedVideo = req.body;
-  const sqlQuery = 'INSERT INTO video (title, url, description, image, profile_id) VALUES ($1, $2, $3, $4, $5);';
-  const sqlArray = [savedVideo.title, savedVideo.url, savedVideo.description, savedVideo.image, profileId];
+  const sqlQuery = 'INSERT INTO video (title, url, description, image, note, profile_id) VALUES ($1, $2, $3, $4, $5, $6);';
+  const sqlArray = [savedVideo.title, savedVideo.url, savedVideo.description, savedVideo.image, savedVideo.note, profileId];
   client.query(sqlQuery, sqlArray).then(() => {
     //307 re-direct tip from Nicco(TA)
     res.redirect(307, `/search/${profileId}?${savedVideo.query}`);
@@ -182,8 +182,8 @@ function saveVideoResource(req, res) {
 function saveJobResource(req, res) {
   const profileId = req.params.id;
   const savedJob = req.body;
-  const sqlQuery = 'INSERT INTO job (title, url, logo, profile_id) VALUES ($1, $2, $3, $4);';
-  const sqlArray = [savedJob.title, savedJob.url, savedJob.logo, profileId];
+  const sqlQuery = 'INSERT INTO job (title, url, logo, note, profile_id) VALUES ($1, $2, $3, $4, $5);';
+  const sqlArray = [savedJob.title, savedJob.url, savedJob.logo, savedJob.note, profileId];
   client.query(sqlQuery, sqlArray).then(() => {
     //307 re-direct tip from Nicco(TA)
     res.redirect(307, `/search/${profileId}?${savedJob.query}`);
@@ -239,16 +239,24 @@ function updateResource(req, res) {
 
 function deleteResource(req, res) {
   // from resources page, user selects button to delete one from db
-  console.log(req.params);
-  console.log(req.body['resource-type']);
-  console.log(req.body);
+  // console.log(req.params);
+  // console.log(req.body['resource-type']);
+  // console.log(req.body);
   const resourceId = req.params.resourceid;
+  const profileId = req.params.id;
   const resourceTable = req.body['resource-type'];
+  console.log('this is resourceTable', resourceTable);
   if(resourceTable === 'job'){
     const sqlQuery = 'DELETE FROM job WHERE id=$1;';
     const sqlArray = [resourceId];
     client.query(sqlQuery, sqlArray).then(() => {
-      response.render(`/resources/${resourceId}`);
+      res.redirect(`/resources/${profileId}`);
+    });
+  } else {
+    const sqlQuery = 'DELETE FROM video WHERE id=$1;';
+    const sqlArray = [resourceId];
+    client.query(sqlQuery, sqlArray).then(() => {
+      res.redirect(`/resources/${profileId}`);
     });
   }
 }
