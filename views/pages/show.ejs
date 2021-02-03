@@ -11,16 +11,43 @@
   <title>Search</title>
 </head>
 <body>
+  <nav><a href="/resources/<%= user %>">View Saved Resources</a></nav>
   <main>
     <h1>Search Results</h1>
-    <% console.log('this is content from front end', content) %>
-    <% for(let i = 0; i < allJobs.length; i++){ %>
+    <section id="jobsinfo">
+    <% for(let i = 0; i < content.jobs.length; i++){ %>
     <ul>
-      <li><%= allJobs[i].title %></li>
-      <li><%= allJobs[i].description %></li>
-
+      <li><img src ="<%= content.jobs[i].logo%>" width="200px"></li>
+      <li><a href="<%= content.jobs[i].url %>"><%= content.jobs[i].title %></a></li>
+      <li><%= content.jobs[i].description %></li>
+      <form action="/jobresources/<%= user %>" method="POST">
+        <input type="hidden" name="title" value="<%= content.jobs[i].title %>">
+        <input type="hidden" name="url" value="<%= content.jobs[i].url %>">
+        <input type="hidden" name="description" value="<%= content.jobs[i].description %>">
+        <input type="hidden" name="logo" value="<%= content.jobs[i].logo %>">
+        <input type="hidden" name="query" value="<%= query %>">
+        <input type="submit" value="Bookmark this Job">
+      </form>
     </ul>
     <% } %>
+  </section>
+  <section id="videoinfo">
+    <% for(let i = 0; i < content.videos.length; i++){ %>
+    <ul>
+      <li><a href="<%= content.videos[i].url %>"><img src="<%= content.videos[i].image%>" width="200px"></a></li>
+      <li><%= content.videos[i].title %></a></li>
+      <li><%= content.videos[i].description %></li>
+      <form action="/videoresources/<%= user %>" method="POST">
+        <input type="hidden" name="title" value="<%= content.videos[i].title %>">
+        <input type="hidden" name="url" value="<%= content.videos[i].url %>">
+        <input type="hidden" name="description" value="<%= content.videos[i].description %>">
+        <input type="hidden" name="image" value="<%= content.videos[i].image %>">
+        <input type="hidden" name="query" value="<%= query %>">
+        <input type="submit" value="Bookmark this Video">
+      </form>
+    </ul>
+    <% } %>
+  </section>
 
   </main>
 
