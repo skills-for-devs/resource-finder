@@ -1,3 +1,6 @@
+'use strict';
+
+
 console.log('loaded');
 let newVariable = document.getElementById('loginfailed');
 if(newVariable){
