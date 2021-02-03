@@ -1,17 +1,17 @@
-# Code 301 Final Project - Skills for Devs - Skillfinder.dev
+# Code 301 Final Project - Skills for Devs
 
+## Live website: skillfinder.dev
 ## GitHub Repo: [Click here](https://github.com/skills-for-devs/resource-finder.git)
 
 ## Team
 
-- AJ Johnson
+- Carly Dekock
 - Lauren Sierra
 - Stephen Webber
-- Carly Dekock
 
 ## Description
 
-A dynamic app/website that allows the user to search for free resources based on the details of relevant job descriptions. User is given the opportunity to sign in to their account, and enter a programming language they’d like to learn more about and potentially find jobs related to. Pulling from GitHub jobs and YouTube APIs the user is presented with jobs related to the language specified as well as informational videos to learn more about the language. Keywords in the job descriptions can be selected to offer further content.
+A dynamic mobile-first app/website that allows the user to search for free resources based on the details of relevant job descriptions. User is given the opportunity to sign in to their account, and enter a programming language they’d like to learn more about and potentially find jobs related to. Pulling from GitHub jobs and YouTube APIs the user is presented with jobs related to the language specified as well as informational videos to learn more about the language. 
 
 ## Getting Started
 

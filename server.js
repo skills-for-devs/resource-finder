@@ -50,7 +50,7 @@ app.post('/search/:id', getSearch);
 app.get('/resources/:id', viewResources); //view saved elements from db
 app.delete('/resources/user/:id/resource/:resourceid', deleteResource);
 // app.error('/error', getError); // for errors
-app.put('/resources', updateResource); // for editing saved favorite
+app.put('/resources/user/:id/resource/:resourceid', updateResource); // for editing saved favorite
 app.post('/videoresources/:id', saveVideoResource);
 app.post('/jobresources/:id', saveJobResource);
 
@@ -193,14 +193,16 @@ function saveJobResource(req, res) {
 function viewResources(req, res) {
   console.log(req.params);
   const profileId = req.params.id;
-  const videosQuery = `SELECT * FROM video WHERE profile_id=${profileId};`;
-  const jobsQuery = `SELECT * FROM job WHERE profile_id=${profileId};`;
+  //ORDER By tip from Skyler(TA) for sorting
+  const videosQuery = `SELECT * FROM video WHERE profile_id=${profileId} ORDER BY id ASC;`;
+  const jobsQuery = `SELECT * FROM job WHERE profile_id=${profileId} ORDER BY id ASC;`;
   console.log(videosQuery);
   client.query(videosQuery).then(videoResults => {
     client.query(jobsQuery).then(jobsResults => {
       res.render('pages/savedresources.ejs', {jobs: jobsResults.rows, videos: videoResults.rows, user: profileId});
     });
   });
+
   // when user click button on nav, is taken to page with saved resources (videos, jobs, notes)
   // pg query from db for user
   // each element is displayed using ejs, h2, img, p
@@ -221,6 +223,25 @@ function viewResources(req, res) {
 }
 
 function updateResource(req, res) {
+  console.log('this is params', req.params);
+  console.log('this is body', req.body);
+  console.log('this is query', req.query);
+  const profileId = req.params.id;
+  const resourceTable = req.body['resource-type'];
+  if(resourceTable === 'job'){
+    const sqlQuery = 'UPDATE job SET title=$1, url=$2, logo=$3, note=$4, profile_id=$5 WHERE id=$6;';
+    const sqlArray = [req.body.title, req.body.url, req.body.logo, req.body.note, req.body.user, req.params.resourceid];
+    client.query(sqlQuery, sqlArray).then(() => {
+      res.redirect(`/resources/${profileId}`);
+    });
+  } else {
+    const sqlQuery = 'UPDATE video SET title=$1, url=$2, description=$3, image=$4, note=$5, profile_id=$6 WHERE id=$7;';
+    const sqlArray = [req.body.title, req.body.url, req.body.description, req.body.image, req.body.note, req.body.user, req.params.resourceid];
+    client.query(sqlQuery, sqlArray).then(() => {
+      res.redirect(`/resources/${profileId}`);
+    });
+  }
+
   // for updating notes on saved resource
   // on front-end, have form that sends this data:
   // const id = req.params.id;
