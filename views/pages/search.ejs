@@ -15,12 +15,14 @@
   <header>
   </header>
   <main>
-    <form action="/search" method="POST">
+    <form action="/search/<%= user.id %>" method="POST">
       <fieldset>
+        <% console.log('this is user', user) %>
         <legend>Search by Keyword</legend>
         <input type="text" name="query" placeholder="Enter a keyword to search">
         <br>
         <input type="submit" value="Search for jobs and resources">
+        <input type="hidden" name="userid" value="<%= user.id %>">
       </fieldset>
     </form>
   </main>
