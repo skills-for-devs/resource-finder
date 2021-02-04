@@ -31,6 +31,10 @@ const PORT = process.env.PORT || 3111;
 app.get('/', (req, res) => {
   res.render('pages/login.ejs', {data: false});
 });
+app.get('/about/:id', (req, res) => {
+  const profileId = req.params.id;
+  res.render('pages/about.ejs', {user: profileId});
+});
 app.post('/signup', getSignup); // login portal
 app.post('/login', getLogin);
 // app.get('/vidsearch', getVideoSearch); // render search input to query APIs

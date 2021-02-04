@@ -5,14 +5,22 @@ body {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 60px;
   line-height: 130%;
   padding-top: 13px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
 }
 
 body div:nth-of-type(2) {
   margin: auto;
-  margin-top: 100px;
+  margin-top: 50px;
   display: block;
   height: 250px;
   width: 400px;
@@ -23,4 +31,193 @@ body div:nth-of-type(2) {
   width: 200px;
   line-height: 50px;
   margin: auto;
+  position: fixed;
+  top: 280px;
+  right: 145px;
+}
+
+body div:nth-of-type(3) {
+  margin: auto;
+  margin-top: 50px;
+  display: block;
+  height: 250px;
+  width: 400px;
+}
+
+#signup {
+  padding: 20px;
+  width: 200px;
+  line-height: 50px;
+  margin: auto;
+  position: fixed;
+  top: 240px;
+  right: 150px;
+}
+
+#signup p {
+  line-height: 18px;
+}
+
+#jobsinfo {
+  width: 440px;
+  height: 30vh;
+  overflow: scroll;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 2px solid black;
+  background-color: lightgray;
+}
+
+#jobsinfo ul {
+  margin: 20px;
+  padding-top: 10px;
+  border: 1px solid black;
+  background-color: white;
+  font-family: Arial;
+}
+
+#jobsinfo li {
+  padding: 5px;
+  /* box-shadow: 5px 5px gray; */
+}
+
+#jobsinfo img {
+  width: 150px;
+}
+
+#jobsinfo form {
+  padding: 5px;
+}
+
+#videoinfo {
+  width: 440px;
+  height: 45vh;
+  overflow: scroll;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  border: 2px solid black;
+  background-color: rgb(221, 211, 211);
+}
+
+#videoinfo ul {
+  margin: 20px;
+  padding-top: 10px;
+  border: 1px solid black;
+  background-color: white;
+  font-family: Arial;
+}
+
+#videoinfo li {
+  padding: 5px;
+}
+
+#videoinfo img {
+  width: 150px;
+}
+
+#videoinfo form {
+  padding: 5px;
+}
+
+#loginbody h1 {
+  margin-top: 60px;
+  text-align: center;
+  line-height: 130%;
+}
+
+#loginbody p {
+  text-align: center;
+}
+
+#logo {
+  width: 50px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+#searchbox {
+  margin: auto;
+  margin-top: 100px;
+  display: block;
+  height: 250px;
+  width: 400px;
+}
+
+#searchbox fieldset {
+  padding: 20px;
+  width: 200px;
+  line-height: 40px;
+  margin: auto;
+  text-align: center;
+}
+
+#searchboxbody h1 {
+  margin-top: 20px;
+  font-size: 60px;
+}
+
+#searchboxbody p {
+  text-align: center;
+}
+
+#searchresults h1 {
+  font-size: 60px;
+  
+}
+
+/* For the savedresources */
+
+#saved {
+  width: 440px;
+  height: 30vh;
+  overflow: scroll;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 20px;
+  /* border: 2px solid black; */
+  background-color: lightgray;
+}
+
+#saved nav {
+  width: 480px;
+}
+
+#saved div {
+  margin-top: 40px;
+  height: 85vh;
+  width: 450px;
+  background-color: gray;
+  overflow: scroll;
+}
+
+#saved div ul {
+  margin: 20px;
+  padding-top: 10px;
+  border: 1px solid black;
+  background-color: white;
+  font-family: Arial;
+}
+
+#saved div li {
+  padding: 5px;
+  /* box-shadow: 5px 5px gray; */
+}
+
+#saved img {
+  width: 150px;
+}
+
+#saved form {
+  padding: 5px;
 }
