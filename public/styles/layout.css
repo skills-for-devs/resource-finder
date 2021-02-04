@@ -143,6 +143,8 @@ body div:nth-of-type(3) {
   margin: auto;
   display: flex;
   align-items: center;
+  text-shadow: 2px 2px 5px black;
+  filter: drop-shadow(0 0 0.25rem salmon);
 }
 
 #searchbox {
@@ -290,6 +292,22 @@ padding-bottom: 15px;
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
   color: darkslategrey;
+}
+
+#searchresults input:last-of-type{
+  display:block;
+  margin: 5px auto 5px auto;
+padding: 5px;
+}
+
+#searchresults input:nth-last-of-type(2){
+padding: 5px;
+
+}
+
+#searchresults ul li img {
+  filter: drop-shadow(0 0 0.75rem rgb(27, 27, 27));
+
 }
 
 /* for desktop view */

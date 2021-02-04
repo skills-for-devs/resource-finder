@@ -16,7 +16,6 @@
 <body id="saved">
   <%- include('layout/nav.ejs') %>
   <main>
-    <% console.log('this is from back end', user) %>
 
   <h1>Saved Resources</h1>
   <button class="updatenotes">Update notes</button>
@@ -25,7 +24,7 @@
     <% for(let i = 0; i < jobs.length; i++){ %>
     <ul>
       <li><img src ="<%= jobs[i].logo%>" width="200px"></li>
-      <li><a href="<%= jobs[i].url %>"><%= jobs[i].title %></a></li>
+      <li><a href="<%= jobs[i].url %>" target="_blank"><%= jobs[i].title %></a></li>
       <p><%= jobs[i].note %></p>
       <form action="/resources/user/<%= user %>/resource/<%= jobs[i].id %>?_method=delete" method="POST">
         <input type="hidden" name="resource-type" value="job">
@@ -48,7 +47,7 @@
   <section id="savedvideos">
     <% for(let i = 0; i < videos.length; i++){ %>
     <ul>
-      <li><a href="<%= videos[i].url %>"><img src="<%= videos[i].image%>" width="200px"></a></li>
+      <li><a href="<%= videos[i].url %>" target="_blank"><img src="<%= videos[i].image%>" width="200px"></a></li>
       <li><%= videos[i].title %></a></li>
       <li><%= videos[i].description %></li>
       <p><%= videos[i].note %></p>
