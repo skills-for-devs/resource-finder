@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
 });
 app.get('/about/:id', (req, res) => {
   const profileId = req.params.id;
+  console.log(profileId);
   res.render('pages/about.ejs', {user: profileId});
 });
 app.post('/signup', getSignup); // login portal
@@ -44,7 +45,7 @@ app.get('/search/new/:id', (req, res) => {
   const userDatabase = `SELECT * FROM profile WHERE id=$1;`;
   const sqlArray = [req.params.id];
   client.query(userDatabase, sqlArray).then(results => {
-    res.render('pages/search.ejs', {user: results.rows[0]});
+    res.render('pages/search.ejs', {user: results.rows[0].id});
   });
 });
 
