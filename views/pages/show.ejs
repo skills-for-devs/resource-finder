@@ -38,7 +38,9 @@
   <section id="videoinfo">
     <% for(let i = 0; i < content.videos.length; i++){ %>
     <ul>
-      <li><a href="<%= content.videos[i].url %>" target="_blank"><img src="<%= content.videos[i].image%>" width="200px"></a></li>
+      <li><iframe width="400" height="300" src="<%= content.videos[i].url %>" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe></li>
       <li><%= content.videos[i].title %></a></li>
       <li><%= content.videos[i].description %></li>
       <form action="/videoresources/<%= user %>" method="POST">
