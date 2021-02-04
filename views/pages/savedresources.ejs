@@ -47,7 +47,9 @@
   <section id="savedvideos">
     <% for(let i = 0; i < videos.length; i++){ %>
     <ul>
-      <li><a href="<%= videos[i].url %>" target="_blank"><img src="<%= videos[i].image%>" width="200px"></a></li>
+      <li><iframe width="400" height="300" src="<%= videos[i].url %>" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe></li>
       <li><%= videos[i].title %></a></li>
       <li><%= videos[i].description %></li>
       <p><%= videos[i].note %></p>

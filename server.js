@@ -207,7 +207,8 @@ function getError(req, res) {
 function Video(videoObject) {
   // constructors for rendering youtube video
   this.title = videoObject.snippet.title;
-  this.url = `https://youtube.com/watch?v=${videoObject.id.videoId}`;
+  this.url = `https://youtube.com/embed/${videoObject.id.videoId}`;
+  // thanks to Chance(TA) for helping us to add the embed feature for videos!
   this.description = videoObject.snippet.description;
   this.image = videoObject.snippet.thumbnails.medium.url;
 }
