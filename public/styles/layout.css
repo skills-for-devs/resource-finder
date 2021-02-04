@@ -28,12 +28,13 @@ body div:nth-of-type(2) {
 
 #loginbox {
   padding: 20px;
-  width: 200px;
+  padding-left: 110px;
+  width: 300px;
   line-height: 50px;
   margin: auto;
   position: fixed;
   top: 280px;
-  right: 145px;
+  /* right: 145px; */
 }
 
 body div:nth-of-type(3) {
@@ -46,12 +47,13 @@ body div:nth-of-type(3) {
 
 #signup {
   padding: 20px;
-  width: 200px;
+  padding-left: 110px;
+  width: 300px;
   line-height: 50px;
   margin: auto;
   position: fixed;
   top: 240px;
-  right: 150px;
+  /* right: 150px; */
 }
 
 #signup p {
@@ -220,4 +222,93 @@ body div:nth-of-type(3) {
 
 #saved form {
   padding: 5px;
+}
+
+#about h2 {
+  font-size: xx-large;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 10px;
+}
+
+#about body {
+  margin: auto;
+  width: 480px;
+}
+
+#about section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+
+}
+
+#about ul {
+  margin: auto;
+  width: 480px;
+  display: flex;
+}
+#about li img {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#about section li {
+  padding-top: 20px;
+}
+
+#about footer {
+  padding-top: 30px;
+}
+
+#about p {
+  font-family: Arial, Helvetica, sans-serif;
+padding-top: 15px;
+padding-bottom: 15px;
+  padding-right: 40px;
+  
+}
+
+#about {
+
+  background-image: url(/img/Pizelex-2.png);
+}
+
+#about h1 {
+  font-family: 'VT323', monospace;
+  font-size: 50px;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 5px black;
+  filter: drop-shadow(0 0 0.75rem salmon);
+}
+
+#about li a {
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkslategrey;
+}
+
+/* for desktop view */
+@media (min-width: 768px){
+#jobsinfo {
+  width: 760px;
+}
+#videoinfo {
+ width: 760px; 
+}
+#saved div {
+  width: 760px;
+}
+#searchresults {
+  margin:auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+}
 }

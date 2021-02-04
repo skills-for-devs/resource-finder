@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "method-override": "^3.0.0",
     "pg": "^8.5.1",
+    "psql": "^0.0.1",
     "superagent": "^6.1.0"
   }
 }

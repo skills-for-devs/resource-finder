@@ -17,14 +17,14 @@
   <h1>Skills for Devs</h1>
   <main>
     <p>Enter your search to find the latest related jobs and videos.</p>
-    <form id="searchbox" action="/search/<%= user.id %>" method="POST">
+    <form id="searchbox" action="/search/<%= user %>" method="POST">
       <fieldset>
         <% console.log('this is user', user) %>
         <legend>Search by Keyword</legend>
         <input type="text" name="query" placeholder="Enter a keyword">
         <br>
         <input type="submit" value="Search for jobs and resources">
-        <input type="hidden" name="userid" value="<%= user.id %>">
+        <input type="hidden" name="userid" value="<%= user %>">
       </fieldset>
     </form>
   </main>
