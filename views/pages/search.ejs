@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles/reset.css">
   <link rel="stylesheet" href="/styles/base.css">
   <link rel="stylesheet" href="/styles/layout.css">
@@ -11,15 +12,16 @@
   <title>Search</title>
 </head>
 
-<body>
-  <header>
-  </header>
+<body id="searchboxbody">
+  <%- include('layout/nav.ejs') %>
+  <h1>Skills for Devs</h1>
   <main>
-    <form action="/search/<%= user.id %>" method="POST">
+    <p>Enter your search to find the latest related jobs and videos.</p>
+    <form id="searchbox" action="/search/<%= user.id %>" method="POST">
       <fieldset>
         <% console.log('this is user', user) %>
         <legend>Search by Keyword</legend>
-        <input type="text" name="query" placeholder="Enter a keyword to search">
+        <input type="text" name="query" placeholder="Enter a keyword">
         <br>
         <input type="submit" value="Search for jobs and resources">
         <input type="hidden" name="userid" value="<%= user.id %>">
