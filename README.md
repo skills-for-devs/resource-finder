@@ -1,6 +1,6 @@
 # Code 301 Final Project - Skills for Devs
 
-## Live website: [skillfinder.dev](skillfinder.dev)
+## Live website: [skills-for-devs.herokuapp.com/](http://skills-for-devs.herokuapp.com/)
 
 ## GitHub Repo: [Click here](https://github.com/skills-for-devs/resource-finder.git)
 
@@ -15,7 +15,7 @@ A dynamic mobile-first app/website that allows the user to search for free resou
 
 ## Getting Started
 
-- You will need: DATABASE_URL, VIDEO_API_KEY
+- You will need: DATABASE_URL, VIDEO_API_KEY, JOBS_API_KEY
 
 ### Dependencies
 
