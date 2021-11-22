@@ -1,16 +1,13 @@
 'use strict';
 
 //------ packages
-
 const express = require('express');
 require('dotenv').config();
 const superagent = require('superagent');
 const pg = require('pg');
 const methodOverride = require('method-override');
-const { response } = require('express');
 
 //------ set up the application
-
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));
@@ -18,20 +15,18 @@ app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 
 //------- global variables
-
 const DATABASE_URL = process.env.DATABASE_URL;
 const VIDEO_API_KEY = process.env.VIDEO_API_KEY;
+const JOBS_API_KEY = process.env.JOBS_API_KEY;
 const client = new pg.Client(DATABASE_URL);
 const PORT = process.env.PORT || 3111;
 
 // ------- routes
-
 app.get('/', (req, res) => {
   res.render('pages/login.ejs', {data: false});
 });
 app.get('/about/:id', (req, res) => {
   const profileId = req.params.id;
-  // console.log(profileId);
   res.render('pages/about.ejs', {user: profileId});
 });
 app.post('/signup', getSignup); // login portal
@@ -88,14 +83,12 @@ function getSignup(req, res) {
 
 function getSearch(req,res) {
   // do both video and job search functions
-  // console.log('this is body', req.body);
-  // console.log('this is params', req.params);
   const query = req.body.query;
   let contentObject = {};
-  const jobsUrl= `https://jobs.github.com/positions.json?description=${query}`;
+  const jobsUrl= `https://data.usajobs.gov/api/search?Keyword=${query}`;
   const videoUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=21&q=${query}&type=video&key=${VIDEO_API_KEY}`;
-  superagent.get(jobsUrl).then(jobsInfo => {
-    const jobs = jobsInfo.body.map(jobObject => new Job(jobObject));
+  superagent.get(jobsUrl).set('Authorization-Key', JOBS_API_KEY).then(jobsInfo => {
+    const jobs = jobsInfo.body.SearchResult.SearchResultItems.map(jobObject => new Job(jobObject));
     contentObject.jobs = jobs;
   }).then(() => superagent.get(videoUrl).then(videoInfo => {
     const videos = videoInfo.body.items.map(videoObject => new Video(videoObject));
@@ -110,8 +103,6 @@ function getSearch(req,res) {
 }
 
 function saveVideoResource(req, res) {
-  // console.log('this is body', req.body);
-  // console.log('this is params', req.params);
   const profileId = req.params.id;
   const savedVideo = req.body;
   const sqlQuery = 'INSERT INTO video (title, url, description, image, note, profile_id) VALUES ($1, $2, $3, $4, $5, $6);';
@@ -134,7 +125,6 @@ function saveJobResource(req, res) {
 }
 
 function viewResources(req, res) {
-  // console.log(req.params);
   const profileId = req.params.id;
   //ORDER By tip from Skyler(TA) for sorting
   const videosQuery = `SELECT * FROM video WHERE profile_id=${profileId} ORDER BY id ASC;`;
@@ -149,9 +139,6 @@ function viewResources(req, res) {
 }
 
 function updateResource(req, res) {
-  // console.log('this is params', req.params);
-  // console.log('this is body', req.body);
-  // console.log('this is query', req.query);
   const profileId = req.params.id;
   const resourceTable = req.body['resource-type'];
   if(resourceTable === 'job'){
@@ -173,9 +160,6 @@ function updateResource(req, res) {
 
 function deleteResource(req, res) {
   // from resources page, user selects button to delete one from db
-  // console.log(req.params);
-  // console.log(req.body['resource-type']);
-  // console.log(req.body);
   const resourceId = req.params.resourceid;
   const profileId = req.params.id;
   const resourceTable = req.body['resource-type'];
@@ -196,13 +180,12 @@ function deleteResource(req, res) {
 }
 
 
-function getError(req, res) {
-  // 404 page
-}
+// function getError(req, res) {
+//   // 404 page
+// }
 
 
 // ------- Helper functions
-
 
 function Video(videoObject) {
   // constructors for rendering youtube video
@@ -213,17 +196,23 @@ function Video(videoObject) {
   this.image = videoObject.snippet.thumbnails.medium.url;
 }
 
+//   // constructor for rendering github job
+// function Job(jobObject) {
+//   this.title = jobObject.title;
+//   this.url = jobObject.url;
+//   this.description = jobObject.description;
+//   this.logo = jobObject.company_logo;
+// }
+
 function Job(jobObject) {
-  // constructor for rendering github job
-  this.title = jobObject.title;
-  this.url = jobObject.url;
-  this.description = jobObject.description;
-  this.logo = jobObject.company_logo;
+  // constructor for rendering usa job
+  this.title = jobObject.MatchedObjectDescriptor.PositionTitle;
+  this.url = jobObject.MatchedObjectDescriptor.PositionURI;
+  this.description = jobObject.MatchedObjectDescriptor.QualificationSummary;
 }
 
 
 // ------- Start server
-
 client.connect()
   .then(() => {
     app.listen(PORT), console.log(`Runnin' on ${PORT}`);
