@@ -19,14 +19,12 @@
     <section id="jobsinfo">
     <% for(let i = 0; i < content.jobs.length; i++){ %>
     <ul>
-      <li><img src ="<%= content.jobs[i].logo%>" width="200px"></li>
       <li><a href="<%= content.jobs[i].url %>" target="_blank"><%= content.jobs[i].title %></a></li>
-      <!-- <p><%= content.jobs[i].description %></p> -->
+      <p><%= content.jobs[i].description %></p>
       <form action="/jobresources/<%= user %>" method="POST">
         <input type="hidden" name="title" value="<%= content.jobs[i].title %>">
         <input type="hidden" name="url" value="<%= content.jobs[i].url %>">
         <input type="hidden" name="description" value="<%= content.jobs[i].description %>">
-        <input type="hidden" name="logo" value="<%= content.jobs[i].logo %>">
         <input type="hidden" name="query" value="<%= query %>">
         <input type="text" name="note" value="<%= content.jobs[i].note %>" placeholder="Enter a note here">
         <input type="submit" value="Bookmark this Job">
